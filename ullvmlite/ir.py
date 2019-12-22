@@ -72,3 +72,19 @@ class Value:
     @property
     def name(self):
         return LLVMGetValueName(self.v)
+
+
+class Function(Value):
+
+    def __init__(self, mod, func_typ, name):
+        self.v = LLVMAddFunction(mod, name, func_typ)
+
+    def append_basic_block(self, label):
+        return LLVMAppendBasicBlock(self.v, label)
+
+    @property
+    def args(self):
+        args = []
+        for i in range(LLVMCountParams(self.v)):
+            args.append(LLVMGetParam(self.v, i))
+        return args
