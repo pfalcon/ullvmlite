@@ -43,3 +43,15 @@ FunctionType = LLVMFunctionType
 
 def PointerType(tp, addrspace=0):
     return LLVMPointerType(tp, addrspace)
+
+
+class Module:
+
+    def __init__(self, name):
+        self.mod = LLVMModuleCreateWithName(name)
+
+    def __int__(self):
+        return self.mod
+
+    def verify(self):
+        assert LLVMVerifyModule(self.mod, LLVMReturnStatusAction, None) == 0
