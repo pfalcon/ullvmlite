@@ -55,3 +55,20 @@ class Module:
 
     def verify(self):
         assert LLVMVerifyModule(self.mod, LLVMReturnStatusAction, None) == 0
+
+
+class Value:
+
+    def __init__(self, v):
+        self.v = v
+
+    def __int__(self):
+        return self.v
+
+    @property
+    def type(self):
+        return LLVMTypeOf(self.v)
+
+    @property
+    def name(self):
+        return LLVMGetValueName(self.v)
