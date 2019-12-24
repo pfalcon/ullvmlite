@@ -88,3 +88,31 @@ class Function(Value):
         for i in range(LLVMCountParams(self.v)):
             args.append(LLVMGetParam(self.v, i))
         return args
+
+
+class IRBuilder:
+
+    def __init__(self, bblock):
+        self.bld = LLVMCreateBuilder()
+        LLVMPositionBuilderAtEnd(self.bld, bblock);
+
+    def position_at_end(self, bblock):
+        LLVMPositionBuilderAtEnd(self.bld, bblock);
+
+    def alloca(self, typ, name=""):
+        return LLVMBuildAlloca(self.bld, typ, name)
+
+    def load(self, ptr, name=""):
+        return Value(LLVMBuildLoad(self.bld, ptr, name))
+
+    def store(self, val, ptr):
+        return LLVMBuildStore(self.bld, val, ptr)
+
+    def add(self, v1, v2, name=""):
+        return Value(LLVMBuildAdd(self.bld, v1, v2, name))
+
+    def ret(self, val):
+        return LLVMBuildRet(self.bld, val)
+
+    def branch(self, label):
+        return LLVMBuildBr(self.bld, label)
