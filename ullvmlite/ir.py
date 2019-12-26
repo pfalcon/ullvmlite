@@ -74,6 +74,15 @@ class Value:
         return LLVMGetValueName(self.v)
 
 
+class Constant(Value):
+
+    def __init__(self, typ, v):
+        if isinstance(v, int):
+            self.v = LLVMConstInt(typ, v, True)
+        else:
+            raise NotImplementedError
+
+
 class Function(Value):
 
     def __init__(self, mod, func_typ, name):
