@@ -125,3 +125,18 @@ class IRBuilder:
 
     def branch(self, label):
         return LLVMBuildBr(self.bld, label)
+
+
+class IdentifiedStructType:
+
+    def __init__(self, tp):
+        self.tp = tp
+        self.elements = []
+
+    def set_body(self, *elems, packed=False):
+        self.elements = elems
+        print("Warning: set_body() isn't implemented")
+        #LLVMStructSetBody(self.tp, elems, packed)
+
+    def __int__(self):
+        return self.tp
