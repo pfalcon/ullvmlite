@@ -39,3 +39,15 @@ def create_mcjit_compiler(mod, target_machine):
     res = LLVMCreateMCJITCompilerForModule(engine_ref, mod, 0, 0, errmsg_ref)
     assert not res
     return Engine(engine_ref[0])
+
+
+class Target:
+
+    @staticmethod
+    def from_default_triple():
+        # TODO
+        return Target()
+
+    def create_target_machine(self):
+        # TODO
+        pass
