@@ -140,3 +140,16 @@ class IdentifiedStructType:
 
     def __int__(self):
         return self.tp
+
+
+class Context:
+
+    def __init__(self, ctx):
+        self.ctx = ctx
+
+    def get_identified_type(self, name):
+        struct_tp = LLVMStructCreateNamed(self.ctx, name)
+        return IdentifiedStructType(struct_tp)
+
+
+global_context = Context(LLVMGetGlobalContext())
