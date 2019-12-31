@@ -1,5 +1,7 @@
 from ullvm_c import *
 
+from . import ir
+
 
 def initialize():
     pass
@@ -39,6 +41,12 @@ def create_mcjit_compiler(mod, target_machine):
     res = LLVMCreateMCJITCompilerForModule(engine_ref, mod, 0, 0, errmsg_ref)
     assert not res
     return Engine(engine_ref[0])
+
+
+def parse_assembly(txt):
+    # Only placeholder, empty modules are supported so far.
+    assert txt == ""
+    return ir.Module('parse_assembly')
 
 
 class Target:
