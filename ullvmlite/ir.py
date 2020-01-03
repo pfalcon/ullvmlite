@@ -56,6 +56,9 @@ class Module:
     def verify(self):
         assert LLVMVerifyModule(self.mod, LLVMReturnStatusAction, None) == 0
 
+    def __str__(self):
+        return LLVMPrintModuleToString(self.mod)
+
 
 class Value:
 
